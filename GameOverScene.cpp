@@ -1,0 +1,33 @@
+#include "GameOverScene.h"
+#include"SceneManager.h"
+#include"Input.h"
+GameOverScene::GameOverScene(GameObject* parent)
+	:GameObject(parent,"GameOverScene"), hImage_(-1), spr_(nullptr)
+{
+}
+
+void GameOverScene::Initialize()
+{
+	spr_ = new Sprite();
+	hImage_ = spr_->Load("Assets//GameOver.png");
+}
+
+void GameOverScene::Update()
+{
+	if (Input::IsKeyUp(DIK_SPACE)) {
+		SceneManager* ps = (SceneManager*)FindObject("SceneManager");
+		ps->ChangeScene(SCENE_ID_TITLE);
+	}
+}
+
+void GameOverScene::Draw()
+{
+	Transform trs;
+	trs.position_ = { 0,0,0 };
+	trs.scale_ = { 1,1,1 };
+	spr_->Draw(trs);
+}
+
+void GameOverScene::Release()
+{
+}
